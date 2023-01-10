@@ -16,4 +16,15 @@ VALUES
 ('Sales Manager', 80000, 4),
 ('HR Director', 150000, 3);
 
-INSERT INTO 
+INSERT INTO employee(first_name, last_name, role_id, manager_id)
+VALUES
+('Michael', 'Scott', 1, null),
+('Dwight', ' Schrute', 2, 1),
+('Jim', 'Halpert', 3, 2),
+('Pam', 'Beesly', 5, 3),
+('Erin', 'Hannon', 4, null);
+('Ryan', 'Howard', 5, 3),
+('Andy', 'Bernard', 5, 1),
+('Kevin', 'Malone', 3, 4),
+('Toby', 'Flenderson', 4, 5),
+('Stanley', 'Hudson', 2, 6);
