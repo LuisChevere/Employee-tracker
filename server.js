@@ -30,4 +30,44 @@ function options() {
             'Quit'
         ]
     })
+    .then(function (answers) {
+        console.log('view');
+        switch (answers.menu) {
+            case 'View All Departments':
+            viewAllDepartments();
+            break;
+            case 'Add Department':
+                addDepartment();
+            break;
+            case 'View All Roles':
+                viewAllRoles();
+            break;
+            case 'Add Role':
+                addRole();
+            break;
+            case 'View All Employees':
+                viewAllEmployees();
+            break;
+            case 'Add Employee':
+                addEmployee();
+            break;
+            case 'Update Employee Role':
+                updateEmployeeRole();
+            break;
+            case 'Delete Department':
+                deleteDepartment();
+            break;
+            case 'Delete Employee':
+                deleteEmployee();
+            break;
+            case 'Delete Role':
+                deleteRole();
+            break;
+            case 'Quit':
+                    quitApp();
+            break;
+            default:
+                console.log("Wrong choice.")    
+        }
+    });
 }
