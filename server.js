@@ -69,5 +69,19 @@ function options() {
             default:
                 console.log("Wrong choice.")    
         }
-    });
-}
+    })
+};
+
+function viewAllDepartments() {
+    const query = 'SELECT * FROM department';
+    connection.query(query, function (err, res) {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            console.log(res)
+            console.table(res);
+            options();
+        }
+    })
+};
