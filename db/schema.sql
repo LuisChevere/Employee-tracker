@@ -4,7 +4,7 @@ CREATE DATABASE company_db;
 USE company_db;
 
 DROP TABLE IF EXISTS department;
-drop TABLE if EXISTS role;
+DROP TABLE IF EXISTS role;
 
 CREATE TABLE department(
     id INT NOT NULL AUTO_INCREMENT,
