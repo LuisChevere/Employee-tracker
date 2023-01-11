@@ -189,7 +189,35 @@ function addEmployee() {
                     value: employee.id
                 }
             });
-            
+            managerArray.push({
+                value: null,
+                name: 'None'
+            })
+
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'newFirstName',
+                    message: 'Please enter first name of employee.'
+                },
+                {
+                    type: 'input',
+                    name: 'newLastName',
+                    message: 'Please enter last name of employee.'
+                },
+                {
+                    type: 'list',
+                    name: 'employeeRole',
+                    message: 'What is the employee role?',
+                    choices: roleArray
+                },
+                {
+                    type: 'list',
+                    name: 'empManager',
+                    message: 'Who is the employee manager?',
+                    choices: managerArray
+                },
+            ])
         })
     })
 }
