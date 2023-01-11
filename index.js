@@ -264,7 +264,14 @@ function updateEmployeeRole() {
                     message: 'Which role would you like to assign selected employee?',
                     choices: roleArray
                 },
-            ])
+            ]).then(function (answers) {
+                connection.query(`UPDATE employee SET role_id = '${answers.newRole}' WHERE id = '${answers.upEmployee}'`, (err, res) => {
+                    if(err) throw err;
+                    console.log('Employee updated!');
+                    console.log(res);
+                    options();
+                })
+            })
         })
     })
 }
