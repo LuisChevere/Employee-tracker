@@ -251,7 +251,20 @@ function updateEmployeeRole() {
                 }
             });
 
-            inquirer.prompt
+            inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'upEmployee',
+                    message: 'Which employee would you like to update?',
+                    choices: employeeArray
+                },
+                {
+                    type: 'list',
+                    name: 'newRole',
+                    message: 'Which role would you like to assign selected employee?',
+                    choices: roleArray
+                },
+            ])
         })
     })
 }
