@@ -138,7 +138,20 @@ function addRole() {
                     }
                 }
             },
-            
-        ])
-    })
+            {
+                type: 'list',
+                name: 'departmentId',
+                message: 'Which department does the new role belong to?',
+                choices: deptArray
+            }
+        ]).then(function(answers) {
+            connection.query(`INSERT INTO role (title, salary, departmentId) VALUES ('${answers.newRoleName}', '${answers.newRoleSalary}', '${answers.departmentId}');`, (err, res) => {
+                if (err) throw err;
+                console.log('New role added!');
+                console.log(res);
+                options();
+            })
+        })
+    });
 }
+
