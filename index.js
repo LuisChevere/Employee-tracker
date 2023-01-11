@@ -315,3 +315,23 @@ function deleteEmployee() {
         })
     })
 }
+
+function deleteRole () {
+    inquirer.prompt ([
+        {
+            type: 'input',
+            name: 'role',
+            message: 'Enter id of the role you would like to delete.'
+        }
+    ]).then((answers) => {
+        const query = `DELETE FROM role WHERE?`;
+        const deleteRoleId = {
+            id: answers.role
+        };
+        connection.query(query, deleteRoleId, (err, res) => {
+            if(err) throw err;
+            console.log('This role has been deleted from company database.');
+            options();
+        })
+    })
+}
