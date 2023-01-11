@@ -1,6 +1,7 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const table = require('console.table');
+const e = require('express');
 
 const connection = mysql.createConnection(
     {
@@ -100,5 +101,44 @@ function addDepartment() {
             console.log(res);
             options();
         })
+    })
+};
+
+function viewAllRoles() {
+    const query = 'SELECT * FROM role';
+    connection.query(query, (err, res) => {
+        if(err) throw err;
+        console.log(res);
+        console.table(res);
+        options();
+    })
+};
+
+function addRole() {
+    connection.query('SELECT * FROM department', (err, data) => {
+        if(err) throw err;
+        let deptArray = data.map(function (department) {
+            return {
+                name: department.name,
+                value: department.id
+            }
+        });
+
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'newRoleSalary',
+                message: 'Please enter salary for role.',
+                validate: salaryInput => {
+                    if (isNaN(salaryInput)) {
+                        console.log('Please enter a number.')
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            
+        ])
     })
 }
