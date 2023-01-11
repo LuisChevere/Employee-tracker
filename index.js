@@ -283,5 +283,15 @@ function deleteDepartment() {
             name: 'department',
             message: 'Enter name of department you would like to delete.'
         }
-    ]).then
+    ]).then((answers) => {
+        const query = `DELETE FROm department WHERE ?`;
+        const deleteDept = {
+            name: answers.department
+        };
+        connection.query(query, deleteDept, (err, res) => {
+            if(err) throw err;
+            console.log('Department successfully deleted from database!');
+            options();
+        })
+    })
 }
