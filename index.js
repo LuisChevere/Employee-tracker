@@ -295,3 +295,23 @@ function deleteDepartment() {
         })
     })
 }
+
+function deleteEmployee() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'employeeId',
+            message: 'Enter id of employee you would like to delete.'
+        }
+    ]).then ((answers) => {
+        const query =`DELETE FROM employee WHERE ?`;
+        const deleteEmp = {
+            id: answers.employeeId
+        };
+        connection.query(query, deleteEmp, (err,res) => {
+            if(err) throw err;
+            console.log('This employee has been deleted from company database.');
+            options();
+        })
+    })
+}
