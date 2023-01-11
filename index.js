@@ -168,4 +168,28 @@ function viewAllEmployees() {
         console.table(res);
         options();
     })
+};
+
+function addEmployee() {
+    let roleArray = [];
+    let managerArray = [];
+    connection.query('SELECT id, title FROM role', (err, data) => {
+        if(err) throw err;
+        roleArray = data.map(function(role) {
+            return{
+                name: role.title,
+                value: role.id
+            }
+        });
+        connection.query('SELECT id, first_name, last_name FROM employee', (err, data) => {
+            if(err) throw err;
+            managerArray = data.map(function(employee) {
+                return{
+                    name: employee.first_name + " " + employee.last_name,
+                    value: employee.id
+                }
+            });
+            
+        })
+    })
 }
