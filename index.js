@@ -242,6 +242,16 @@ function updateEmployeeRole() {
                 value: role.id
             }
         });
-        connection
+        connection.query('SELECT id, first_name, last_name FROM employee', (err, data) => {
+            if (err) throw err;
+            employeeArray = data.map(function (employee) {
+                return {
+                    name: employee.first_name + " " + employee.last_name,
+                    value: employee.id
+                }
+            });
+
+            inquirer.prompt
+        })
     })
 }
