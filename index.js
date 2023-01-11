@@ -335,3 +335,14 @@ function deleteRole () {
         })
     })
 }
+
+connection.connect((err) => {
+    if(err) throw err;
+    console.log(`Connected to company_db database`);
+    options();
+})
+
+quitApp = () => {
+    console.log('Successful left database, goodbye!');
+    connection.end();
+}
