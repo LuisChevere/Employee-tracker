@@ -230,3 +230,18 @@ function addEmployee() {
         })
     })
 }
+
+function updateEmployeeRole() {
+    let roleArray = [];
+    let employee = [];
+    connection.query('SELECT id, title FROM role', (err, res) => {
+        if (err) throw err;
+        roleArray = data.map(function (role) {
+            return{
+                name: role.title,
+                value: role.id
+            }
+        });
+        connection
+    })
+}
