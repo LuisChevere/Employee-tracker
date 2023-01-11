@@ -275,3 +275,13 @@ function updateEmployeeRole() {
         })
     })
 }
+
+function deleteDepartment() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'department',
+            message: 'Enter name of department you would like to delete.'
+        }
+    ]).then
+}
