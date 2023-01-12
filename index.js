@@ -1,7 +1,6 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const table = require('console.table');
-const e = require('express');
 
 const connection = mysql.createConnection(
     {
@@ -127,6 +126,11 @@ function addRole() {
         inquirer.prompt([
             {
                 type: 'input',
+                name: 'newRoleName',
+                message: 'Which role would you like to add?'
+            },
+            {
+                type: 'input',
                 name: 'newRoleSalary',
                 message: 'Please enter salary for role.',
                 validate: salaryInput => {
@@ -145,7 +149,7 @@ function addRole() {
                 choices: deptArray
             }
         ]).then(function(answers) {
-            connection.query(`INSERT INTO role (title, salary, departmentId) VALUES ('${answers.newRoleName}', '${answers.newRoleSalary}', '${answers.departmentId}');`, (err, res) => {
+            connection.query(`INSERT INTO role (title, salary, department_id) VALUES ('${answers.newRoleName}', '${answers.newRoleSalary}', '${answers.departmentId}');`, (err, res) => {
                 if (err) throw err;
                 console.log('New role added!');
                 console.log(res);
@@ -156,7 +160,9 @@ function addRole() {
 }
 
 function viewAllEmployees() {
-    const query = `SELECT employee.id, employee.first_name, employee.last_name, role.salary, role.title, department.name AS department, CONCAT(manager.first_name)," ", manager.last_name) As manager FROM employee
+    const query = `SELECT employee.id, employee.first_name, employee.last_name, role.salary, role.title, department.name AS department, CONCAT(manager.first_name," ", manager.last_name) As manager 
+    
+    FROM employee
 
     LEFT JOIN role ON employee.role_id = role.id
     LEFT JOIN department ON role.department_id = department.id
@@ -233,8 +239,8 @@ function addEmployee() {
 
 function updateEmployeeRole() {
     let roleArray = [];
-    let employee = [];
-    connection.query('SELECT id, title FROM role', (err, res) => {
+    let employeeArray = [];
+    connection.query('SELECT id, title FROM role', (err, data) => {
         if (err) throw err;
         roleArray = data.map(function (role) {
             return{
@@ -284,7 +290,7 @@ function deleteDepartment() {
             message: 'Enter name of department you would like to delete.'
         }
     ]).then((answers) => {
-        const query = `DELETE FROm department WHERE ?`;
+        const query = `DELETE FROM department WHERE ?`;
         const deleteDept = {
             name: answers.department
         };
@@ -301,7 +307,7 @@ function deleteEmployee() {
         {
             type: 'input',
             name: 'employeeId',
-            message: 'Enter id of employee you would like to delete.'
+            message: 'Enter Id of employee you would like to delete.'
         }
     ]).then ((answers) => {
         const query =`DELETE FROM employee WHERE ?`;
@@ -321,7 +327,7 @@ function deleteRole () {
         {
             type: 'input',
             name: 'role',
-            message: 'Enter id of the role you would like to delete.'
+            message: 'Enter Id of the role you would like to delete.'
         }
     ]).then((answers) => {
         const query = `DELETE FROM role WHERE?`;
